@@ -1,33 +1,21 @@
 .container{
-  background-color: aquamarine;
+  background-color: red;
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-rows: 100px,500px,100px;
-  grid-template-columns: 100px,600px;
-  gap: 10px;
+ grid-template-rows: 40px,200px,40px;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 1px;
 }
-.TODO
-{
-  background-color: aliceblue;
-  grid-row: 1;
-  grid-column: 3;
+.todo{
+  background-color: #000C66;
 }
-.inProgress
-{
-  background-color: red;
-  grid-row: 1;
-  grid-column: 3;
+.inprogress{
+  background-color: #000C66;
 }
-.inReview
-{
-  background-color: green;
-  grid-row: 1;
-  grid-column: 3;
+.inpreview{
+  background-color: #000C66;
 }
-.Done
-{
-  background-color: blueviolet;
-  grid-row: 1;
-  grid-column: 3;
+.done{
+  background-color: #000C66;
 }
