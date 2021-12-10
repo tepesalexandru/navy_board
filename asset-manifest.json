@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/navy_board/static/css/main.8b54ef49.chunk.css",
-    "main.js": "/navy_board/static/js/main.4558270f.chunk.js",
-    "main.js.map": "/navy_board/static/js/main.4558270f.chunk.js.map",
+    "main.css": "/navy_board/static/css/main.54159bf8.chunk.css",
+    "main.js": "/navy_board/static/js/main.37fd384f.chunk.js",
+    "main.js.map": "/navy_board/static/js/main.37fd384f.chunk.js.map",
     "runtime-main.js": "/navy_board/static/js/runtime-main.57a5eb73.js",
     "runtime-main.js.map": "/navy_board/static/js/runtime-main.57a5eb73.js.map",
-    "static/js/2.9ef72d36.chunk.js": "/navy_board/static/js/2.9ef72d36.chunk.js",
-    "static/js/2.9ef72d36.chunk.js.map": "/navy_board/static/js/2.9ef72d36.chunk.js.map",
+    "static/js/2.72f3e362.chunk.js": "/navy_board/static/js/2.72f3e362.chunk.js",
+    "static/js/2.72f3e362.chunk.js.map": "/navy_board/static/js/2.72f3e362.chunk.js.map",
     "index.html": "/navy_board/index.html",
-    "static/css/main.8b54ef49.chunk.css.map": "/navy_board/static/css/main.8b54ef49.chunk.css.map",
-    "static/js/2.9ef72d36.chunk.js.LICENSE.txt": "/navy_board/static/js/2.9ef72d36.chunk.js.LICENSE.txt"
+    "static/css/main.54159bf8.chunk.css.map": "/navy_board/static/css/main.54159bf8.chunk.css.map",
+    "static/js/2.72f3e362.chunk.js.LICENSE.txt": "/navy_board/static/js/2.72f3e362.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.57a5eb73.js",
-    "static/js/2.9ef72d36.chunk.js",
-    "static/css/main.8b54ef49.chunk.css",
-    "static/js/main.4558270f.chunk.js"
+    "static/js/2.72f3e362.chunk.js",
+    "static/css/main.54159bf8.chunk.css",
+    "static/js/main.37fd384f.chunk.js"
   ]
 }
