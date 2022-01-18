@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import AddCircle from "@mui/icons-material/AddCircleRounded";
 import CreateTaskPopup from "./CreateTaskPopup";
+import { IState, ITask } from "./models/ITask";
+import BoardTask from "./components/BoardTask";
 
 function App() {
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
   return (
     <div>
       <div>
@@ -16,7 +17,7 @@ function App() {
           <Toolbar>
             <Typography
               variant="h4"
-              sx={{  flexGrow: 1, }} 
+              sx={{ flexGrow: 1 }}
               style={{ fontWeight: 600 }}
             >
               The Navy Board
@@ -27,18 +28,27 @@ function App() {
 
       <div className="container">
         <div className="todo">
-          <AppBar position="static"  sx={{ background: "#7EC8E3" }}>
+          <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>
               <Typography
                 variant="h4"
-                sx={{ flexGrow: 1, textAlign: "center", color: "#000C66"  }}
+                sx={{ flexGrow: 1, textAlign: "center", color: "#000C66" }}
                 style={{ fontWeight: 600 }}
               >
                 TO DO
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup />
+          <CreateTaskPopup
+            onSave={(newTask: ITask) => {
+              setTasks((oldTasks) => [...oldTasks, newTask]);
+            }}
+          />
+          {tasks
+            .filter((t) => t.state === IState.TODO)
+            .map((task) => (
+              <BoardTask task={task} />
+            ))}
         </div>
 
         <div className="inprogress">
@@ -53,7 +63,16 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup />
+          <CreateTaskPopup
+            onSave={(newTask: ITask) => {
+              setTasks((oldTasks) => [...oldTasks, newTask]);
+            }}
+          />
+          {tasks
+            .filter((t) => t.state === IState.IN_PROGRESS)
+            .map((task) => (
+              <BoardTask task={task} />
+            ))}
         </div>
 
         <div className="inreview">
@@ -68,9 +87,18 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup />
+          <CreateTaskPopup
+            onSave={(newTask: ITask) => {
+              setTasks((oldTasks) => [...oldTasks, newTask]);
+            }}
+          />
+          {tasks
+            .filter((t) => t.state === IState.IN_REVIEW)
+            .map((task) => (
+              <BoardTask task={task} />
+            ))}
         </div>
- 
+
         <div className="done">
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>
@@ -83,7 +111,16 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup />
+          <CreateTaskPopup
+            onSave={(newTask: ITask) => {
+              setTasks((oldTasks) => [...oldTasks, newTask]);
+            }}
+          />
+          {tasks
+            .filter((t) => t.state === IState.DONE)
+            .map((task) => (
+              <BoardTask task={task} />
+            ))}
         </div>
       </div>
     </div>
