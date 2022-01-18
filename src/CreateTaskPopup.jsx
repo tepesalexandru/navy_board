@@ -41,8 +41,9 @@ export default function CreateTaskPopup() {
 
   return (
     <div>
-      <Stack spacing={2} direction="row">
+      <Stack spacing={2} direction="row" >
         <Button
+          sx={{ background: "#050A30" }}
           variant="contained"
           endIcon={<AddCircle />}
           onClick={() => setOpen(true)}
@@ -58,30 +59,33 @@ export default function CreateTaskPopup() {
         maxWidth="md"
         fullWidth
       >
-        <DialogTitle id="alert-dialog-title">{"New task"}</DialogTitle>
-        <DialogContent>
+        <DialogTitle id="alert-dialog-title" sx={{ background: "#000C66" }} color="white">{"New task"}</DialogTitle>
+        <DialogContent  sx={{ background: "#000C66" }}>
           <Stack spacing={3}>
             <Input
-              placeholder="Task name"
+            
+              placeholder="Add a task name"
               sx={{
-                width: "300px",
+                width: "300px", color:"white"
               }}
             />
             <Input
+            
               placeholder="Add a description..."
               sx={{
-                width: "300px",
+                width: "300px",color:"white"
               }}
             />
             <Input
+            
               placeholder="Add User"
               sx={{
-                width: "300px",
+                width: "300px", color:"white"
               }}
             />
-            <FormControl className={classes.formControl}>
-            <InputLabel>Set Status</InputLabel>
-            <Select labelId="select-demo" id='status-select' value={value} onChange={HandleChange}>
+            <FormControl className={classes.formControl} sx={{ background: "white"  }}>
+            <InputLabel background="black" sx={{ color: "black"  }}>Set Status</InputLabel>
+            <Select labelId="select-demo" id='status-select'  value={value} onChange={HandleChange}>
               <MenuItem value={'TODO'}>TODO</MenuItem>
               <MenuItem value={'In Progress'}>In Progress</MenuItem>
               <MenuItem value={'In Review'}>In Review</MenuItem>
@@ -94,9 +98,9 @@ export default function CreateTaskPopup() {
         </DialogActions>
           </Stack>
         </DialogContent>        
-        <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Create
+        <DialogActions sx={{ background: "#000C66" }}>
+          <Button onClick={handleClose} autoFocus sx={{ background: "#050A30" }} variant="contained" >
+                Save 
           </Button>
         </DialogActions>
       </Dialog>

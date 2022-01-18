@@ -15,10 +15,9 @@ function App() {
         <AppBar position="static" sx={{ background: "#050A30" }}>
           <Toolbar>
             <Typography
-              variant="h5"
-              sx={{
-                flexGrow: 1,
-              }}
+              variant="h4"
+              sx={{  flexGrow: 1, }} 
+              style={{ fontWeight: 600 }}
             >
               The Navy Board
             </Typography>
@@ -28,13 +27,14 @@ function App() {
 
       <div className="container">
         <div className="todo">
-          <AppBar position="static" sx={{ background: "#7EC8E3" }}>
+          <AppBar position="static"  sx={{ background: "#7EC8E3" }}>
             <Toolbar>
               <Typography
-                variant="h5"
-                sx={{ flexGrow: 1, textAlign: "center", color: "#000C66" }}
+                variant="h4"
+                sx={{ flexGrow: 1, textAlign: "center", color: "#000C66"  }}
+                style={{ fontWeight: 600 }}
               >
-                TODO
+                TO DO
               </Typography>
             </Toolbar>
           </AppBar>
@@ -45,8 +45,9 @@ function App() {
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>
               <Typography
-                variant="h5"
+                variant="h4"
                 sx={{ flexGrow: 1, textAlign: "center", color: "#000C66" }}
+                style={{ fontWeight: 600 }}
               >
                 IN PROGRESS
               </Typography>
@@ -55,12 +56,13 @@ function App() {
           <CreateTaskPopup />
         </div>
 
-        <div className="inpreview">
+        <div className="inreview">
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>
               <Typography
-                variant="h5"
+                variant="h4"
                 sx={{ flexGrow: 1, textAlign: "center", color: "#000C66" }}
+                style={{ fontWeight: 600 }}
               >
                 IN REVIEW
               </Typography>
@@ -68,13 +70,14 @@ function App() {
           </AppBar>
           <CreateTaskPopup />
         </div>
-
+ 
         <div className="done">
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>
               <Typography
-                variant="h5"
+                variant="h4"
                 sx={{ flexGrow: 1, textAlign: "center", color: "#000C66" }}
+                style={{ fontWeight: 600 }}
               >
                 DONE
               </Typography>

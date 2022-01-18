@@ -1,11 +1,11 @@
 .container{
-  background-color: red;
+  background-color: lightskyblue;
   height: 100vh;
   width: 100vw;
   display: grid;
  grid-template-rows: 40px,200px,40px;
   grid-template-columns: repeat(4,1fr);
-  grid-gap: 1px;
+  grid-gap: 1px; 
 }
 .todo{
   background-color: #000C66;
@@ -13,7 +13,7 @@
 .inprogress{
   background-color: #000C66;
 }
-.inpreview{
+.inreview{
   background-color: #000C66;
 }
 .done{
