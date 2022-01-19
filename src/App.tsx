@@ -6,10 +6,12 @@ import Toolbar from "@mui/material/Toolbar";
 import CreateTaskPopup from "./CreateTaskPopup";
 import { IState, ITask } from "./models/ITask";
 import BoardTask from "./components/BoardTask";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import AddCircle from "@mui/icons-material/AddCircleRounded";
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -41,11 +43,15 @@ function App() {
             </Toolbar>
           </AppBar>
           <Box sx={{ padding: "16px" }}>
-            <CreateTaskPopup
-              onSave={(newTask: ITask) => {
-                setTasks((oldTasks) => [...oldTasks, newTask]);
-              }}
-            />
+            <Button
+              sx={{ background: "#050A30" }}
+              variant="contained"
+              endIcon={<AddCircle />}
+              onClick={() => setOpen(true)}
+            >
+              Add a task
+            </Button>
+
             {tasks
               .filter((t) => t.state === IState.TODO)
               .map((task) => (
@@ -67,11 +73,14 @@ function App() {
             </Toolbar>
           </AppBar>
           <Box sx={{ padding: "16px" }}>
-            <CreateTaskPopup
-              onSave={(newTask: ITask) => {
-                setTasks((oldTasks) => [...oldTasks, newTask]);
-              }}
-            />
+            <Button
+              sx={{ background: "#050A30" }}
+              variant="contained"
+              endIcon={<AddCircle />}
+              onClick={() => setOpen(true)}
+            >
+              Add a task
+            </Button>
             {tasks
               .filter((t) => t.state === IState.IN_PROGRESS)
               .map((task) => (
@@ -93,11 +102,14 @@ function App() {
             </Toolbar>
           </AppBar>
           <Box sx={{ padding: "16px" }}>
-            <CreateTaskPopup
-              onSave={(newTask: ITask) => {
-                setTasks((oldTasks) => [...oldTasks, newTask]);
-              }}
-            />
+            <Button
+              sx={{ background: "#050A30" }}
+              variant="contained"
+              endIcon={<AddCircle />}
+              onClick={() => setOpen(true)}
+            >
+              Add a task
+            </Button>
             {tasks
               .filter((t) => t.state === IState.IN_REVIEW)
               .map((task) => (
@@ -118,11 +130,14 @@ function App() {
             </Toolbar>
           </AppBar>
           <Box sx={{ padding: "16px" }}>
-            <CreateTaskPopup
-              onSave={(newTask: ITask) => {
-                setTasks((oldTasks) => [...oldTasks, newTask]);
-              }}
-            />
+            <Button
+              sx={{ background: "#050A30" }}
+              variant="contained"
+              endIcon={<AddCircle />}
+              onClick={() => setOpen(true)}
+            >
+              Add a task
+            </Button>
             {tasks
               .filter((t) => t.state === IState.DONE)
               .map((task) => (
@@ -131,6 +146,13 @@ function App() {
           </Box>
         </div>
       </div>
+      <CreateTaskPopup
+        onSave={(newTask: ITask) => {
+          setTasks((oldTasks) => [...oldTasks, newTask]);
+        }}
+        open={open}
+        setOpen={setOpen}
+      />
     </div>
   );
 }

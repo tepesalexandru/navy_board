@@ -5,7 +5,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Input, Stack } from "@mui/material";
-import AddCircle from "@mui/icons-material/AddCircleRounded";
 import { makeStyles } from "@mui/styles";
 import { MenuItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
@@ -22,13 +21,12 @@ const useStyles = makeStyles((theme: any) => ({
 
 type Props = {
   onSave: (task: ITask) => void;
+  open: boolean;
+  setOpen: (state: boolean) => void;
 };
 
-export default function CreateTaskPopup(props: Props) {
+export default function CreateTaskPopup({ onSave, open, setOpen }: Props) {
   const classes = useStyles();
-
-  const [open, setOpen] = useState(false);
-
   const [state, setState] = useState<IState>(IState.TODO);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -54,8 +52,8 @@ export default function CreateTaskPopup(props: Props) {
       assignee,
       state,
     };
-    if (newTask.name === '' || newTask.assignee === '') return;
-    props.onSave(newTask);
+    if (newTask.name === "" || newTask.assignee === "") return;
+    onSave(newTask);
     setOpen(false);
     setName("");
     setDescription("");
@@ -65,16 +63,7 @@ export default function CreateTaskPopup(props: Props) {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <Stack spacing={2} direction="row">
-        <Button
-          sx={{ background: "#050A30" }}
-          variant="contained"
-          endIcon={<AddCircle />}
-          onClick={() => setOpen(true)}
-        >
-          Add a task
-        </Button>
-      </Stack>
+      <Stack spacing={2} direction="row"></Stack>
       <Dialog
         open={open}
         onClose={handleClose}
