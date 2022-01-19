@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Input, Stack } from "@mui/material";
-import AddCircle from "@mui/icons-material/AddCircleRounded";
+import { Box, Input, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import InputLabel from "@mui/material/InputLabel";
 import { MenuItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import {IState, ITask} from './models/ITask';
+import { IState, ITask } from "./models/ITask";
 
 const useStyles = makeStyles((theme: any) => ({
   formControl: {
     margin: (theme.spacing = "2"),
     minWidth: 200,
+    borderRadius: "5px",
   },
 }));
 
 type Props = {
-  onSave: (task: ITask) => void,
+  open: boolean;
+  setOpen: (state: boolean) => void;
+  taskSelected?: ITask;
+  setTaskSelected: (task: ITask | undefined) => void;
+  setTasks: any;
+  tasks: ITask[];
 };
 
-export default function CreateTaskPopup(props: Props) {
+export default function CreateTaskPopup({
+  open,
+  setOpen,
+  taskSelected,
+  setTaskSelected,
+  setTasks,
+  tasks,
+}: Props) {
   const classes = useStyles();
-
-  const [open, setOpen] = useState(false);
-
   const [state, setState] = useState<IState>(IState.TODO);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -38,11 +46,26 @@ export default function CreateTaskPopup(props: Props) {
     setState(event.target.value);
   };
 
+  useEffect(() => {
+    if (taskSelected) {
+      setOpen(true);
+      setName(taskSelected.name);
+      setDescription(taskSelected.description);
+      setAssignee(taskSelected.assignee);
+      setState(taskSelected.state);
+    }
+  }, [taskSelected]);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setOpen(false);
+    setTaskSelected(undefined);
+  };
+
+  const saveTask = () => {
     let newTask: ITask = {
       id: `${Math.floor(Math.random() * 200000)}`,
       name,
@@ -50,22 +73,31 @@ export default function CreateTaskPopup(props: Props) {
       assignee,
       state,
     };
-    props.onSave(newTask);
+    if (newTask.name === "" || newTask.assignee === "") return;
+
+    if (taskSelected) {
+      let taskIndex = tasks.findIndex(
+        (task: ITask) => task.id === taskSelected.id
+      );
+      const oldTasks = [...tasks];
+      if (taskIndex > -1) {
+        oldTasks[taskIndex] = { ...newTask };
+      }
+      setTasks(oldTasks);
+    } else {
+      setTasks((oldTasks: ITask[]) => [...oldTasks, newTask]);
+    }
     setOpen(false);
+    setTaskSelected(undefined);
+    setName("");
+    setDescription("");
+    setAssignee("");
+    setState(IState.TODO);
   };
 
   return (
-    <div>
-      <Stack spacing={2} direction="row">
-        <Button
-          sx={{ background: "#050A30" }}
-          variant="contained"
-          endIcon={<AddCircle />}
-          onClick={() => setOpen(true)}
-        >
-          Add a task
-        </Button>
-      </Stack>
+    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Stack spacing={2} direction="row"></Stack>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -114,14 +146,12 @@ export default function CreateTaskPopup(props: Props) {
               className={classes.formControl}
               sx={{ background: "white" }}
             >
-              <InputLabel sx={{ color: "black" }}>
-                Set Status
-              </InputLabel>
               <Select
                 labelId="select-demo"
                 id="status-select"
                 value={state}
                 onChange={HandleChange}
+                sx={{ background: "#030936", color: "#fff" }}
               >
                 <MenuItem value={IState.TODO}>TODO</MenuItem>
                 <MenuItem value={IState.IN_PROGRESS}>In Progress</MenuItem>
@@ -135,7 +165,7 @@ export default function CreateTaskPopup(props: Props) {
         </DialogContent>
         <DialogActions sx={{ background: "#000C66" }}>
           <Button
-            onClick={handleClose}
+            onClick={saveTask}
             autoFocus
             sx={{ background: "#050A30" }}
             variant="contained"
@@ -144,6 +174,6 @@ export default function CreateTaskPopup(props: Props) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 }
