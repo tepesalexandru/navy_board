@@ -66,16 +66,18 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup
-            onSave={(newTask: ITask) => {
-              setTasks((oldTasks) => [...oldTasks, newTask]);
-            }}
-          />
-          {tasks
-            .filter((t) => t.state === IState.IN_PROGRESS)
-            .map((task) => (
-              <BoardTask task={task} />
-            ))}
+          <Box sx={{ padding: "16px" }}>
+            <CreateTaskPopup
+              onSave={(newTask: ITask) => {
+                setTasks((oldTasks) => [...oldTasks, newTask]);
+              }}
+            />
+            {tasks
+              .filter((t) => t.state === IState.IN_PROGRESS)
+              .map((task) => (
+                <BoardTask task={task} />
+              ))}
+          </Box>
         </div>
 
         <div className="inreview">
@@ -90,16 +92,18 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup
-            onSave={(newTask: ITask) => {
-              setTasks((oldTasks) => [...oldTasks, newTask]);
-            }}
-          />
-          {tasks
-            .filter((t) => t.state === IState.IN_REVIEW)
-            .map((task) => (
-              <BoardTask task={task} />
-            ))}
+          <Box sx={{ padding: "16px" }}>
+            <CreateTaskPopup
+              onSave={(newTask: ITask) => {
+                setTasks((oldTasks) => [...oldTasks, newTask]);
+              }}
+            />
+            {tasks
+              .filter((t) => t.state === IState.IN_REVIEW)
+              .map((task) => (
+                <BoardTask task={task} />
+              ))}
+          </Box>
         </div>
         <div className="done">
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
@@ -113,16 +117,18 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup
-            onSave={(newTask: ITask) => {
-              setTasks((oldTasks) => [...oldTasks, newTask]);
-            }}
-          />
-          {tasks
-            .filter((t) => t.state === IState.DONE)
-            .map((task) => (
-              <BoardTask task={task} />
-            ))}
+          <Box sx={{ padding: "16px" }}>
+            <CreateTaskPopup
+              onSave={(newTask: ITask) => {
+                setTasks((oldTasks) => [...oldTasks, newTask]);
+              }}
+            />
+            {tasks
+              .filter((t) => t.state === IState.DONE)
+              .map((task) => (
+                <BoardTask task={task} />
+              ))}
+          </Box>
         </div>
       </div>
     </div>

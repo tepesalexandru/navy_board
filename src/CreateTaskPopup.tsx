@@ -7,7 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Input, Stack } from "@mui/material";
 import AddCircle from "@mui/icons-material/AddCircleRounded";
 import { makeStyles } from "@mui/styles";
-import InputLabel from "@mui/material/InputLabel";
 import { MenuItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -17,6 +16,7 @@ const useStyles = makeStyles((theme: any) => ({
   formControl: {
     margin: (theme.spacing = "2"),
     minWidth: 200,
+    borderRadius: "5px",
   },
 }));
 
@@ -122,12 +122,12 @@ export default function CreateTaskPopup(props: Props) {
               className={classes.formControl}
               sx={{ background: "white" }}
             >
-              <InputLabel sx={{ color: "black" }}>Set Status</InputLabel>
               <Select
                 labelId="select-demo"
                 id="status-select"
                 value={state}
                 onChange={HandleChange}
+                sx={{ background: "#030936", color: "#fff" }}
               >
                 <MenuItem value={IState.TODO}>TODO</MenuItem>
                 <MenuItem value={IState.IN_PROGRESS}>In Progress</MenuItem>
