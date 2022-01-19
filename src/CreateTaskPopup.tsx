@@ -54,6 +54,7 @@ export default function CreateTaskPopup(props: Props) {
       assignee,
       state,
     };
+    if (newTask.name === '' || newTask.assignee === '') return;
     props.onSave(newTask);
     setOpen(false);
     setName("");
