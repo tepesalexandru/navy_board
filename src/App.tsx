@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import CreateTaskPopup from "./CreateTaskPopup";
 import { IState, ITask } from "./models/ITask";
 import BoardTask from "./components/BoardTask";
+import { Box } from "@mui/material";
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -39,16 +40,18 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <CreateTaskPopup
-            onSave={(newTask: ITask) => {
-              setTasks((oldTasks) => [...oldTasks, newTask]);
-            }}
-          />
-          {tasks
-            .filter((t) => t.state === IState.TODO)
-            .map((task) => (
-              <BoardTask task={task} />
-            ))}
+          <Box sx={{ padding: "16px" }}>
+            <CreateTaskPopup
+              onSave={(newTask: ITask) => {
+                setTasks((oldTasks) => [...oldTasks, newTask]);
+              }}
+            />
+            {tasks
+              .filter((t) => t.state === IState.TODO)
+              .map((task) => (
+                <BoardTask task={task} />
+              ))}
+          </Box>
         </div>
 
         <div className="inprogress">
@@ -98,7 +101,6 @@ function App() {
               <BoardTask task={task} />
             ))}
         </div>
-
         <div className="done">
           <AppBar position="static" sx={{ background: "#7EC8E3" }}>
             <Toolbar>

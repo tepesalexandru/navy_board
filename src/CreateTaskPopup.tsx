@@ -4,14 +4,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Input, Stack } from "@mui/material";
+import { Box, Input, Stack } from "@mui/material";
 import AddCircle from "@mui/icons-material/AddCircleRounded";
 import { makeStyles } from "@mui/styles";
 import InputLabel from "@mui/material/InputLabel";
 import { MenuItem } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import {IState, ITask} from './models/ITask';
+import { IState, ITask } from "./models/ITask";
 
 const useStyles = makeStyles((theme: any) => ({
   formControl: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 type Props = {
-  onSave: (task: ITask) => void,
+  onSave: (task: ITask) => void;
 };
 
 export default function CreateTaskPopup(props: Props) {
@@ -43,6 +43,10 @@ export default function CreateTaskPopup(props: Props) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const saveTask = () => {
     let newTask: ITask = {
       id: `${Math.floor(Math.random() * 200000)}`,
       name,
@@ -52,10 +56,14 @@ export default function CreateTaskPopup(props: Props) {
     };
     props.onSave(newTask);
     setOpen(false);
+    setName("");
+    setDescription("");
+    setAssignee("");
+    setState(IState.TODO);
   };
 
   return (
-    <div>
+    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
       <Stack spacing={2} direction="row">
         <Button
           sx={{ background: "#050A30" }}
@@ -114,9 +122,7 @@ export default function CreateTaskPopup(props: Props) {
               className={classes.formControl}
               sx={{ background: "white" }}
             >
-              <InputLabel sx={{ color: "black" }}>
-                Set Status
-              </InputLabel>
+              <InputLabel sx={{ color: "black" }}>Set Status</InputLabel>
               <Select
                 labelId="select-demo"
                 id="status-select"
@@ -135,7 +141,7 @@ export default function CreateTaskPopup(props: Props) {
         </DialogContent>
         <DialogActions sx={{ background: "#000C66" }}>
           <Button
-            onClick={handleClose}
+            onClick={saveTask}
             autoFocus
             sx={{ background: "#050A30" }}
             variant="contained"
@@ -144,6 +150,6 @@ export default function CreateTaskPopup(props: Props) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 }
