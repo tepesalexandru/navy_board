@@ -12,6 +12,9 @@ import AddCircle from "@mui/icons-material/AddCircleRounded";
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [open, setOpen] = useState(false);
+  const [taskSelected, setTaskSelected] = useState<ITask | undefined>(
+    undefined
+  );
 
   return (
     <div>
@@ -55,7 +58,7 @@ function App() {
             {tasks
               .filter((t) => t.state === IState.TODO)
               .map((task) => (
-                <BoardTask task={task} />
+                <BoardTask task={task} onClick={() => setTaskSelected(task)} />
               ))}
           </Box>
         </div>
@@ -84,7 +87,7 @@ function App() {
             {tasks
               .filter((t) => t.state === IState.IN_PROGRESS)
               .map((task) => (
-                <BoardTask task={task} />
+                <BoardTask task={task} onClick={() => setTaskSelected(task)} />
               ))}
           </Box>
         </div>
@@ -113,7 +116,7 @@ function App() {
             {tasks
               .filter((t) => t.state === IState.IN_REVIEW)
               .map((task) => (
-                <BoardTask task={task} />
+                <BoardTask task={task} onClick={() => setTaskSelected(task)} />
               ))}
           </Box>
         </div>
@@ -141,17 +144,18 @@ function App() {
             {tasks
               .filter((t) => t.state === IState.DONE)
               .map((task) => (
-                <BoardTask task={task} />
+                <BoardTask task={task} onClick={() => setTaskSelected(task)} />
               ))}
           </Box>
         </div>
       </div>
       <CreateTaskPopup
-        onSave={(newTask: ITask) => {
-          setTasks((oldTasks) => [...oldTasks, newTask]);
-        }}
+        tasks={tasks}
+        setTasks={setTasks}
         open={open}
         setOpen={setOpen}
+        taskSelected={taskSelected}
+        setTaskSelected={setTaskSelected}
       />
     </div>
   );

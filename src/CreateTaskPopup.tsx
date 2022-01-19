@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -20,12 +20,22 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 type Props = {
-  onSave: (task: ITask) => void;
   open: boolean;
   setOpen: (state: boolean) => void;
+  taskSelected?: ITask;
+  setTaskSelected: (task: ITask | undefined) => void;
+  setTasks: any;
+  tasks: ITask[];
 };
 
-export default function CreateTaskPopup({ onSave, open, setOpen }: Props) {
+export default function CreateTaskPopup({
+  open,
+  setOpen,
+  taskSelected,
+  setTaskSelected,
+  setTasks,
+  tasks,
+}: Props) {
   const classes = useStyles();
   const [state, setState] = useState<IState>(IState.TODO);
   const [name, setName] = useState("");
@@ -36,12 +46,23 @@ export default function CreateTaskPopup({ onSave, open, setOpen }: Props) {
     setState(event.target.value);
   };
 
+  useEffect(() => {
+    if (taskSelected) {
+      setOpen(true);
+      setName(taskSelected.name);
+      setDescription(taskSelected.description);
+      setAssignee(taskSelected.assignee);
+      setState(taskSelected.state);
+    }
+  }, [taskSelected]);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setTaskSelected(undefined);
   };
 
   const saveTask = () => {
@@ -53,8 +74,21 @@ export default function CreateTaskPopup({ onSave, open, setOpen }: Props) {
       state,
     };
     if (newTask.name === "" || newTask.assignee === "") return;
-    onSave(newTask);
+
+    if (taskSelected) {
+      let taskIndex = tasks.findIndex(
+        (task: ITask) => task.id === taskSelected.id
+      );
+      const oldTasks = [...tasks];
+      if (taskIndex > -1) {
+        oldTasks[taskIndex] = { ...newTask };
+      }
+      setTasks(oldTasks);
+    } else {
+      setTasks((oldTasks: ITask[]) => [...oldTasks, newTask]);
+    }
     setOpen(false);
+    setTaskSelected(undefined);
     setName("");
     setDescription("");
     setAssignee("");

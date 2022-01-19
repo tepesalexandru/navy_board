@@ -5,11 +5,13 @@ import AssigneeIcon from "@mui/icons-material/AccountCircle";
 
 interface Props {
   task: ITask;
+  onClick: () => void;
 }
 
-export default function BoardTask({ task }: Props): ReactElement {
+export default function BoardTask({ task, onClick }: Props): ReactElement {
   return (
     <Box
+      onClick={onClick}
       sx={{
         color: "white",
         background: "rgba(5, 10, 48, 0.6);",
@@ -28,7 +30,7 @@ export default function BoardTask({ task }: Props): ReactElement {
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-start",
-          gap: "10px"
+          gap: "10px",
         }}
       >
         <AssigneeIcon /> {task.assignee}
